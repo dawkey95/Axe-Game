@@ -7,18 +7,20 @@ int main()
     int width;
     int height;
 
+
     //Variables Initialized
     width = 350;
     height = 200;
 
+
     //Main Code
     InitWindow(width, height, "Axe Game");
 
-    while(true)
+    while(WindowShouldClose() == false)
     {
         BeginDrawing();
 
-        ClearBackground(RED);
+        ClearBackground(WHITE);
 
         EndDrawing();
     }
