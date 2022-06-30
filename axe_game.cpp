@@ -10,7 +10,7 @@ int main()
     double cheeseBurger;
     bool ShouldHaveLunch;
 
-    //Variables insantiated
+    //Variables Initialized
     width = 350;
     height = 200;
     rootBeer = 1.99;
