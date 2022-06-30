@@ -13,4 +13,13 @@ int main()
 
     //Main Code
     InitWindow(width, height, "Axe Game");
+
+    while(true)
+    {
+        BeginDrawing();
+
+        ClearBackground(RED);
+
+        EndDrawing();
+    }
 }
