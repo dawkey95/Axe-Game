@@ -18,7 +18,7 @@
     float directionH = 5;
 
     //  Collisions
-    float tolerance = playerRadius = obstacleRadius;
+    float tolerance = playerRadius + obstacleRadius;
     float goal = (5 * playerRadius) + obstacleRadius;
     bool collisionWithObstacle{};
     bool collisionWithScoringZone{};
