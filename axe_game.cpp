@@ -43,6 +43,7 @@
     //  Color Definitions
     Color CYAN = {0, 255, 255, 255};
     Color ScoreColor = CYAN;
+    Color ScoreColorSecond = CYAN;
     Color PlayerColor = DARKGRAY;
     Color ObstacleColor = MAROON;
     Color ObstacleColorSecond = RED;
@@ -59,7 +60,9 @@
     // Gameplay
     int PlayerSpeed = 10;
     int Score = 0;
-    int Delay = 2*60;
+    int ScoreSecond = 0;
+    int TotalScore = Score + ScoreSecond;
+    int Delay = 1*60;
     int Timer = Delay;
     int GameStarted = false;
 
@@ -116,6 +119,8 @@ void ResetGameVariables()
     obstacleCenterYSecond = 50; 
     Timer = Delay;
     Score = 0;
+    ScoreSecond = 0;
+    TotalScore = 0;
     collisionWithObstacle = false;
     collisionWithObstacleSecond = false;
 }
@@ -128,13 +133,23 @@ void CalculateAndIndicateScoring()
         Score += ((goal - distance) / playerRadius) + 1;
         // recolor the obstacle
         DrawCircle(obstacleCenterX, obstacleCenterY, obstacleRadius, ScoreColor);   
-        DrawCircle(obstacleCenterXSecond, obstacleCenterYSecond, obstacleRadiusSecond, ScoreColor);
+    }
+}
+
+void CalculateAndIndicateScoringSecond()
+{
+    if (collisionWithScoringZoneSecond)
+    {
+        // increase score based on the distance from the obstacle but never less than 1 
+        ScoreSecond += ((goalSecond - distanceSecond) / playerRadius) + 1;
+        // recolor the obstacle
+        DrawCircle(obstacleCenterXSecond, obstacleCenterYSecond, obstacleRadiusSecond, ScoreColorSecond);  
     }
 }
 
 void DrawScorePlayerAndObstacle()
 {
-    DrawText(TextFormat("Score: %i", Score), windowWidth * .85, windowHeight * .9, 20, ScoreColor);
+    DrawText(TextFormat("Score: %i", TotalScore), windowWidth * .85, windowHeight * .9, 20, ScoreColor);
     DrawCircle(playerCenterX, playerCenterY, playerRadius, PlayerColor);
     DrawCircle(obstacleCenterX, obstacleCenterY, obstacleRadius, ObstacleColor);
     DrawCircle(obstacleCenterXSecond, obstacleCenterYSecond, obstacleRadiusSecond, ObstacleColorSecond);
@@ -210,7 +225,7 @@ int main()
             if(collisionWithObstacle || collisionWithObstacleSecond)
             {
                 DisplayTitle(5, 10);
-                DrawText(TextFormat("Score: %i", Score), windowWidth * .33, windowHeight * .4, 55, ScoreColor);
+                DrawText(TextFormat("Score: %i", TotalScore), windowWidth * .33, windowHeight * .4, 55, ScoreColor);
                 DrawText("Did You Improve?", windowWidth * .33, windowHeight * .5, 30, ObstacleColor);
                 if(Timer <= 0)
                 {
@@ -230,6 +245,7 @@ int main()
             {
                 DrawScorePlayerAndObstacle();
                 CalculateAndIndicateScoring();
+                CalculateAndIndicateScoringSecond();
                 BouncyBallMovement();
                 ProcessGameControls();
             } 
