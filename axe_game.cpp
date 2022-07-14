@@ -68,8 +68,7 @@
 
 bool UseWASDToProceed(float PercentScreenWidth, float PercentScreenHeight)
 {
-    // Current Game Time (reduced to a whole number) divided by the length of the Flicker array 
-    // leaves me a remainder I may use to count through the colors  Modulus FTW!
+    // Current Game Time (reduced to a whole number) divided by the length of the Flicker array
     int Sequencer = (int)GetTime() % FlickerSize; 
     DrawText("Press W, A, S, or D\n  or   Esc to Quit", (windowWidth * (PercentScreenWidth / 100)), (windowHeight * (PercentScreenHeight / 100)), 15, Flicker[Sequencer]);
     if(IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D))
@@ -151,7 +150,7 @@ void ProcessGameControls()
 
 int main()
 {
-    InitWindow(windowWidth, windowHeight, "W/A/S/D Finger Trainer");
+    InitWindow(windowWidth, windowHeight, "DodgeBall");
     SetTargetFPS(60);
 
     while(!WindowShouldClose())          
